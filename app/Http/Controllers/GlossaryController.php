@@ -36,4 +36,8 @@ class GlossaryController extends Controller
         // получаем из БД полный адрес
         return static::getFullUrl($url_short);
     }
+
+    public function help() {
+        return view('help', ['domain' => Config::get('myconfig.domain')]);
+    }
 }

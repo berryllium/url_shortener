@@ -23,6 +23,6 @@ Route::get('/glossary', function () {
     return Glossary::all();
   });
 
-Route::get('/add', 'GlossaryController@add');
+Route::post('/add', 'GlossaryController@add');
 
 Route::get('/get', 'GlossaryController@get');

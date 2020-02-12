@@ -22,7 +22,7 @@ class GlossaryController extends Controller
         return Glossary::where('url_short', $url_short)->select('url_full')->first()['url_full'];
     }
 
-    public function add() {
+    public function add(Request $request) {
         // принимаем из запроса полный url
         $url_full = request('url');
         // записываем в БД новую пару url и получаем короткий вариант, второй аргумент - длина короткого url

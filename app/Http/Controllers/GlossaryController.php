@@ -11,8 +11,10 @@ class GlossaryController extends Controller
     // получаем из базы данных полный URL по скоращенному и делаем редирект с кодом 308
     public function index($url_short)
     {
-        $url_full =  static::getFullUrl($url_short);
-        return redirect($url_full, 308);
+        if($url_full =  static::getFullUrl($url_short)) {
+            return redirect($url_full, 308);
+        }
+        return abort(404);
     }
 
     public function getFullUrl($url_short) {

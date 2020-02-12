@@ -24,7 +24,7 @@ class GlossaryController extends Controller
         // принимаем из запроса полный url
         $url_full = request('url');
         // записываем в БД новую пару url и получаем короткий вариант, второй аргумент - длина короткого url
-        return Glossary::addUrl($url_full, 4);
+        return Glossary::addUrl($url_full, Config::get('myconfig.url_length'));
     }
 
     public function get() {

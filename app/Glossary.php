@@ -12,7 +12,12 @@ class Glossary extends Model
 
     static function addUrl($url_full, $length)
     {
-        $url_short = static::generateUrl($url_full, $length);
+        return static::where('url_short', 'DWdK')->first();
+        do {
+            $url_short = static::generateUrl($url_full, $length);
+        } 
+        while (!static::where('url_short', $url_short)->first());
+
         static::insert(
             ['url_full' => $url_full, 'url_short' => $url_short]
         );

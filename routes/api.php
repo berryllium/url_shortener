@@ -22,3 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/glossary', function () {
     return Glossary::all();
   });
+
+Route::get('/add', 'GlossaryController@add');
+
+Route::get('/get', 'GlossaryController@get');

@@ -16,7 +16,7 @@ class CreateGlossariesTable extends Migration
         Schema::create('glossaries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('url_full');
-            $table->string('url_short');
+            $table->string('url_short')->index();
             $table->timestamps();
         });
     }

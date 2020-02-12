@@ -1,7 +1,7 @@
 <?php
 return [
   // адрес домена
-  'domain' => 'http://napopravku/', 
+  'domain' => 'http://212.75.235.215/', 
   // длина короткого адреса
   'url_length' => 4                 
 ];

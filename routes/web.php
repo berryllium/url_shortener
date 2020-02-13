@@ -20,7 +20,7 @@
 // });
 
 // регистрируем роут для страницы описания API
-Route::get('/api/help/', 'GlossaryController@help');
+Route::get('/api/help/', 'SiteController@help');
 
 // регистрируем роут для переадресации пользователей
-Route::get('/{url_short}', 'GlossaryController@index');
+Route::get('/{url_short}', 'SiteController@index');

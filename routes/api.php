@@ -18,11 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// регистрируем маршрут сервиса сокращения url
-Route::get('/glossary', function () {
-    return Glossary::all();
-  });
 
-Route::post('/add', 'GlossaryController@add');
+// регистрируем маршруты для API
 
-Route::get('/get', 'GlossaryController@get');
+Route::post('', 'ApiController@add');
+
+Route::get('', 'ApiController@get');

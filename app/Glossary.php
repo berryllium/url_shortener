@@ -14,8 +14,7 @@ class Glossary extends Model
     {
         do {
             $url_short = static::generateUrl($url_full, $length);
-        } 
-        while (static::where('url_short', $url_short)->first());
+        } while (static::where('url_short', $url_short)->first());
 
         static::insert(
             ['url_full' => $url_full, 'url_short' => $url_short]
@@ -32,5 +31,18 @@ class Glossary extends Model
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    static function getFullUrl($url_short)
+    {
+        return static::where('url_short', $url_short)->select('url_full')->first()['url_full'];
+    }
+
+    static function getManyUrl($count = 0)
+    {
+        if ($count) {
+            return static::select('url_full', 'url_short')->limit($count)->get();
+        }
+        return static::select('url_full', 'url_short')->get();
     }
 }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>URL Shortener</title>
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <style>
+      form, #short {
+          width: 500px;
+          margin: 0 auto;
+      }
+      
+      input {
+          margin: 20px 0;
+      }
+  </style>
+</head>
+
+<body>
+  <h1 class="text-center">Сокращатель ссылок</h1>
+  <form id="form">
+    <div class="row">
+        <label class="col-12" for="url">Вставьте сюда длинную ссылку</label>
+        <input class="col-12" type="text" name="url" id="url" width="100%">
+        <input class="col-12" type="submit" value="Сократить">
+    </div>
+  </form>
+  <div id="short"></div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" type = "text/javascript"></script>
+
+  <script>
+    $('body').on('submit', '#form', function (e) {
+      e.preventDefault()
+        $.post(
+         "/api",
+         {
+           url: $('#url').val()
+         },
+         onAjaxSuccess
+       );
+    });
+    function onAjaxSuccess(data) {
+      if (!data) return false;
+      $('#short').html(`
+      <div class="row"><p class="col-6">Короткая ссылка: </p>
+      <a id="link" class="col-6" href="${data}">${data}</a><br>
+      <button id="copy" class="col-12" data-clipboard-target="#link">Скопировать в буфер</button></div>
+      `)
+      var clip = new ClipboardJS('#copy')
+      $('#copy').on('click', function() {
+        this.innerText = 'Скопировано';
+      }) 
+    };
+  </script>
+</body>
+
+</html>

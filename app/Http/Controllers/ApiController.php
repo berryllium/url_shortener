@@ -12,9 +12,11 @@ class ApiController extends Controller
     public function add(Request $request)
     {
         // принимаем из запроса полный url
-        $url_full = request('url');
-        // записываем в БД новую пару url и получаем короткий вариант, второй аргумент - длина короткого url
-        return Glossary::addUrl($url_full, Config::get('myconfig.url_length'));
+        if(!empty($url_full = request('url'))){
+            // записываем в БД новую пару url и получаем короткий вариант, второй аргумент - длина короткого url
+            return Glossary::addUrl($url_full, Config::get('myconfig.url_length'));
+        }
+        return '';
     }
 
     public function get()
@@ -26,11 +28,5 @@ class ApiController extends Controller
             // получаем из БД полный адрес
             return Glossary::getFullUrl($url_short);
         }
-        // если установлено количество записей, возвращаем коллекцию в заданном количестве
-        if (request('count')) {
-            return Glossary::getManyUrl(request('count'));
-        }
-        // если запрос без параметров - возвращем всю коллекцию
-        return Glossary::getManyUrl();
     }
 }
